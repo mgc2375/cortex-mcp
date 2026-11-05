@@ -1,0 +1,10 @@
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+const HOME = process.env.HOME;
+const t = new StdioClientTransport({ command: `${HOME}/hexstrike-ai/hexstrike_env/bin/python`, args: [`${HOME}/hexstrike-ai/hexstrike_mcp.py`, '--server', 'http://127.0.0.1:8888'], env: process.env });
+const c = new Client({ name: 'probe', version: '1' }, { capabilities: {} }, { timeout: 300000 });
+await c.connect(t);
+const tools = await c.listTools();
+console.log('TOOL COUNT:', tools.tools.length);
+console.log(tools.tools.map(x => x.name).join(', '));
+process.exit(0);

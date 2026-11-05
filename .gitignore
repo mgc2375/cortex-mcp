@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Secrets — real API keys live here, never commit
+config.json
+
+# Runtime / state
+*.log
+.crate/
+crates/
+
+# macOS
+.DS_Store
+
+# Backups / scratch
+*.orig

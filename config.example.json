@@ -1,0 +1,21 @@
+{
+  "IP_API_KEY": "",
+  "RDAP_API_KEY": "",
+  "HIBP_API_KEY": "",
+  "SHODAN_API_KEY": "",
+  "EXA_API_KEY": "",
+  "VIRUSTOTAL_API_KEY": "",
+  "HUNTER_API_KEY": "",
+  "GREYNOISE_API_KEY": "",
+  "ALIENVAULT_API_KEY": "",
+  "SECURITYTRAILS_API_KEY": "",
+  "ZOOMEYE_API_KEY": "",
+  "SAUCENAO_API_KEY": "",
+  "IMAGGA_API_KEY": "",
+  "IMAGGA_API_SECRET": "",
+  "GOOGLE_CLOUD_API_KEY": "",
+  "EMAILOSINT_API_KEY": "",
+  "PORT": 3000,
+  "HOST": "0.0.0.0",
+  "WHOISXML_API_KEY": ""
+}

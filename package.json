@@ -1,0 +1,22 @@
+{
+  "name": "cortex-mcp",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Cortex, the suite-wide orchestrator MCP: workflow brain, upstream aggregator, dash sideband",
+  "main": "src/server.js",
+  "bin": {
+    "cortex": "src/server.js"
+  },
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.0",
+    "@rekl0w/mcp-openapi-discovery": "^0.5.0",
+    "chrome-devtools-mcp": "^1.12.0",
+    "mcp-server-kubernetes": "^4.2.1",
+    "mcp-shodan": "file:../../mcps/mcp-shodan",
+    "swagger-mcp": "^1.0.8",
+    "zod": "^3.25.0"
+  }
+}
