@@ -4,6 +4,14 @@ Cortex is the orchestrator at the center of a security-testing suite. It's a sin
 
 Point one MCP client at Cortex and you get the whole fleet — hexstrike (~100 offensive tools), Shodan/VirusTotal, OSINT, Nuclei, Playwright/Chrome DevTools, Ghidra/radare2/Frida, Kubernetes, Wireshark, a web3 auditor, and more — behind a workflow brain that tracks state per target and refuses to run anything offensive until you explicitly arm it.
 
+## Architecture
+
+`callEntry()` in `src/entry.js` dispatches each curated registry ID on its `kind` into one of four backends: the `hexstrike` HTTP fleet, the spawned `upstream` MCP pool, the `suite_tools` Python arsenal, or a local `builtin` CLI. The map below is generated from `src/registry.js` — Cortex (green), every MCP/dispatcher (blue), and the tools it calls through each (red).
+
+<p align="center"><img src="assets/architecture.svg" alt="Cortex wiring: the Cortex orchestrator dispatching by kind to its MCPs and the tools each one calls" width="680"></p>
+
+> For `upstream` MCPs the red boxes are the registry verbs Cortex exposes; each server also presents its own full tool set at runtime (e.g. `osint` has ~57), reachable via `callUpstreamTool()`.
+
 ## What it does
 
 - **Aggregates upstreams.** One registry (`src/registry.js`) maps short IDs like `web.xss`, `osint.subs`, `recon.net` to the right upstream MCP, hexstrike tool, local CLI, or suite helper. Upstreams are spawned lazily and self-heal if they crash (`src/clients.js`).

@@ -1,0 +1,225 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" viewBox="0 0 680 1780" role="img" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+<title>Cortex wiring: Cortex orchestrator, its MCPs, and the tools each MCP calls</title>
+<desc>Green Cortex dispatches by entry.kind to blue MCP servers; each MCP branches to the red tools Cortex calls, grouped by the four dispatch kinds.</desc>
+<style>
+  text{font-size:14px;fill:#1a1a1a}
+  .ts{font-size:12px;fill:#6b7177}
+  .th{font-weight:600}
+  .cortex rect{fill:#EAF3DE;stroke:#3B6D11;stroke-width:1.5}
+  .cortex text{fill:#27500A}
+  .mcp rect{fill:#E6F1FB;stroke:#185FA5;stroke-width:1}
+  .mcp text{fill:#0C447C;text-anchor:middle}
+  .tool rect{fill:#FCEBEB;stroke:#A32D2D;stroke-width:1}
+  .tool text{fill:#791F1F}
+  line.g{stroke:#3B6D11;stroke-width:2}
+  line.b{stroke:#185FA5;stroke-width:2}
+</style>
+<rect x="0" y="0" width="680" height="1780" fill="#ffffff"/>
+
+<line class="g" x1="170" y1="966" x2="190" y2="222"/>
+<line class="g" x1="170" y1="966" x2="190" y2="426"/>
+<line class="g" x1="170" y1="966" x2="190" y2="462"/>
+<line class="g" x1="170" y1="966" x2="190" y2="498"/>
+<line class="g" x1="170" y1="966" x2="190" y2="522"/>
+<line class="g" x1="170" y1="966" x2="190" y2="546"/>
+<line class="g" x1="170" y1="966" x2="190" y2="570"/>
+<line class="g" x1="170" y1="966" x2="190" y2="594"/>
+<line class="g" x1="170" y1="966" x2="190" y2="618"/>
+<line class="g" x1="170" y1="966" x2="190" y2="642"/>
+<line class="g" x1="170" y1="966" x2="190" y2="666"/>
+<line class="g" x1="170" y1="966" x2="190" y2="690"/>
+<line class="g" x1="170" y1="966" x2="190" y2="714"/>
+<line class="g" x1="170" y1="966" x2="190" y2="738"/>
+<line class="g" x1="170" y1="966" x2="190" y2="762"/>
+<line class="g" x1="170" y1="966" x2="190" y2="786"/>
+<line class="g" x1="170" y1="966" x2="190" y2="810"/>
+<line class="g" x1="170" y1="966" x2="190" y2="834"/>
+<line class="g" x1="170" y1="966" x2="190" y2="858"/>
+<line class="g" x1="170" y1="966" x2="190" y2="882"/>
+<line class="g" x1="170" y1="966" x2="190" y2="906"/>
+<line class="g" x1="170" y1="966" x2="190" y2="1290"/>
+<line class="g" x1="170" y1="966" x2="190" y2="1710"/>
+
+<line class="b" x1="355" y1="222" x2="400" y2="42"/>
+<line class="b" x1="355" y1="222" x2="400" y2="66"/>
+<line class="b" x1="355" y1="222" x2="400" y2="90"/>
+<line class="b" x1="355" y1="222" x2="400" y2="114"/>
+<line class="b" x1="355" y1="222" x2="400" y2="138"/>
+<line class="b" x1="355" y1="222" x2="400" y2="162"/>
+<line class="b" x1="355" y1="222" x2="400" y2="186"/>
+<line class="b" x1="355" y1="222" x2="400" y2="210"/>
+<line class="b" x1="355" y1="222" x2="400" y2="234"/>
+<line class="b" x1="355" y1="222" x2="400" y2="258"/>
+<line class="b" x1="355" y1="222" x2="400" y2="282"/>
+<line class="b" x1="355" y1="222" x2="400" y2="306"/>
+<line class="b" x1="355" y1="222" x2="400" y2="330"/>
+<line class="b" x1="355" y1="222" x2="400" y2="354"/>
+<line class="b" x1="355" y1="222" x2="400" y2="378"/>
+<line class="b" x1="355" y1="222" x2="400" y2="402"/>
+
+<line class="b" x1="355" y1="426" x2="400" y2="426"/>
+<line class="b" x1="355" y1="462" x2="400" y2="450"/>
+<line class="b" x1="355" y1="462" x2="400" y2="474"/>
+<line class="b" x1="355" y1="498" x2="400" y2="498"/>
+<line class="b" x1="355" y1="522" x2="400" y2="522"/>
+<line class="b" x1="355" y1="546" x2="400" y2="546"/>
+<line class="b" x1="355" y1="570" x2="400" y2="570"/>
+<line class="b" x1="355" y1="594" x2="400" y2="594"/>
+<line class="b" x1="355" y1="618" x2="400" y2="618"/>
+<line class="b" x1="355" y1="642" x2="400" y2="642"/>
+<line class="b" x1="355" y1="666" x2="400" y2="666"/>
+<line class="b" x1="355" y1="690" x2="400" y2="690"/>
+<line class="b" x1="355" y1="714" x2="400" y2="714"/>
+<line class="b" x1="355" y1="738" x2="400" y2="738"/>
+<line class="b" x1="355" y1="762" x2="400" y2="762"/>
+<line class="b" x1="355" y1="786" x2="400" y2="786"/>
+<line class="b" x1="355" y1="810" x2="400" y2="810"/>
+<line class="b" x1="355" y1="834" x2="400" y2="834"/>
+<line class="b" x1="355" y1="858" x2="400" y2="858"/>
+<line class="b" x1="355" y1="882" x2="400" y2="882"/>
+<line class="b" x1="355" y1="906" x2="400" y2="906"/>
+
+<line class="b" x1="355" y1="1290" x2="400" y2="930"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="954"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="978"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1002"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1026"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1050"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1074"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1098"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1122"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1146"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1170"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1194"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1218"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1242"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1266"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1290"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1314"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1338"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1362"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1386"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1410"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1434"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1458"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1482"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1506"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1530"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1554"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1578"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1602"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1626"/>
+<line class="b" x1="355" y1="1290" x2="400" y2="1650"/>
+
+<line class="b" x1="355" y1="1710" x2="400" y2="1674"/>
+<line class="b" x1="355" y1="1710" x2="400" y2="1698"/>
+<line class="b" x1="355" y1="1710" x2="400" y2="1722"/>
+<line class="b" x1="355" y1="1710" x2="400" y2="1746"/>
+
+<g class="cortex"><rect x="20" y="936" width="150" height="60" rx="10"/><text class="th" x="95" y="964" text-anchor="middle">Cortex</text><text class="ts" x="95" y="982" text-anchor="middle" fill="#3B6D11">callEntry · by kind</text></g>
+
+<text class="ts" x="190" y="26">kind: hexstrike</text>
+<text class="ts" x="190" y="414">kind: upstream</text>
+<text class="ts" x="190" y="920">kind: suite</text>
+<text class="ts" x="190" y="1662">kind: builtin</text>
+
+<g class="mcp"><rect x="190" y="212" width="165" height="20" rx="5"/><text x="272" y="226">hexstrike :8888</text></g>
+<g class="mcp"><rect x="190" y="416" width="165" height="20" rx="5"/><text x="272" y="430">shodan</text></g>
+<g class="mcp"><rect x="190" y="452" width="165" height="20" rx="5"/><text x="272" y="466">osint</text></g>
+<g class="mcp"><rect x="190" y="488" width="165" height="20" rx="5"/><text x="272" y="502">openapi</text></g>
+<g class="mcp"><rect x="190" y="512" width="165" height="20" rx="5"/><text x="272" y="526">swagger</text></g>
+<g class="mcp"><rect x="190" y="536" width="165" height="20" rx="5"/><text x="272" y="550">nuclei</text></g>
+<g class="mcp"><rect x="190" y="560" width="165" height="20" rx="5"/><text x="272" y="574">playwright</text></g>
+<g class="mcp"><rect x="190" y="584" width="165" height="20" rx="5"/><text x="272" y="598">chrome</text></g>
+<g class="mcp"><rect x="190" y="608" width="165" height="20" rx="5"/><text x="272" y="622">radare2</text></g>
+<g class="mcp"><rect x="190" y="632" width="165" height="20" rx="5"/><text x="272" y="646">ghidra</text></g>
+<g class="mcp"><rect x="190" y="656" width="165" height="20" rx="5"/><text x="272" y="670">frida</text></g>
+<g class="mcp"><rect x="190" y="680" width="165" height="20" rx="5"/><text x="272" y="694">jadx</text></g>
+<g class="mcp"><rect x="190" y="704" width="165" height="20" rx="5"/><text x="272" y="718">ios</text></g>
+<g class="mcp"><rect x="190" y="728" width="165" height="20" rx="5"/><text x="272" y="742">wiremcp</text></g>
+<g class="mcp"><rect x="190" y="752" width="165" height="20" rx="5"/><text x="272" y="766">sipnab</text></g>
+<g class="mcp"><rect x="190" y="776" width="165" height="20" rx="5"/><text x="272" y="790">peykan :6278</text></g>
+<g class="mcp"><rect x="190" y="800" width="165" height="20" rx="5"/><text x="272" y="814">hack3270</text></g>
+<g class="mcp"><rect x="190" y="824" width="165" height="20" rx="5"/><text x="272" y="838">solidaudit</text></g>
+<g class="mcp"><rect x="190" y="848" width="165" height="20" rx="5"/><text x="272" y="862">sequential</text></g>
+<g class="mcp"><rect x="190" y="872" width="165" height="20" rx="5"/><text x="272" y="886">context7</text></g>
+<g class="mcp"><rect x="190" y="896" width="165" height="20" rx="5"/><text x="272" y="910">kube</text></g>
+<g class="mcp"><rect x="190" y="1280" width="165" height="20" rx="5"/><text x="272" y="1294">suite_tools run.py</text></g>
+<g class="mcp"><rect x="190" y="1700" width="165" height="20" rx="5"/><text x="272" y="1714">builtin CLIs</text></g>
+
+<g class="tool"><rect x="400" y="32" width="258" height="20" rx="5"/><text x="410" y="46">intelligent_smart_scan</text></g>
+<g class="tool"><rect x="400" y="56" width="258" height="20" rx="5"/><text x="410" y="70">feroxbuster_scan</text></g>
+<g class="tool"><rect x="400" y="80" width="258" height="20" rx="5"/><text x="410" y="94">katana_crawl</text></g>
+<g class="tool"><rect x="400" y="104" width="258" height="20" rx="5"/><text x="410" y="118">arjun_parameter_discovery</text></g>
+<g class="tool"><rect x="400" y="128" width="258" height="20" rx="5"/><text x="410" y="142">dalfox_xss_scan</text></g>
+<g class="tool"><rect x="400" y="152" width="258" height="20" rx="5"/><text x="410" y="166">sqlmap_scan</text></g>
+<g class="tool"><rect x="400" y="176" width="258" height="20" rx="5"/><text x="410" y="190">ffuf_scan</text></g>
+<g class="tool"><rect x="400" y="200" width="258" height="20" rx="5"/><text x="410" y="214">detect_technologies_ai</text></g>
+<g class="tool"><rect x="400" y="224" width="258" height="20" rx="5"/><text x="410" y="238">httpx_probe</text></g>
+<g class="tool"><rect x="400" y="248" width="258" height="20" rx="5"/><text x="410" y="262">hydra_attack</text></g>
+<g class="tool"><rect x="400" y="272" width="258" height="20" rx="5"/><text x="410" y="286">graphql_scanner</text></g>
+<g class="tool"><rect x="400" y="296" width="258" height="20" rx="5"/><text x="410" y="310">subfinder_scan</text></g>
+<g class="tool"><rect x="400" y="320" width="258" height="20" rx="5"/><text x="410" y="334">dnsenum_scan</text></g>
+<g class="tool"><rect x="400" y="344" width="258" height="20" rx="5"/><text x="410" y="358">gau_discovery</text></g>
+<g class="tool"><rect x="400" y="368" width="258" height="20" rx="5"/><text x="410" y="382">wafw00f_scan</text></g>
+<g class="tool"><rect x="400" y="392" width="258" height="20" rx="5"/><text x="410" y="406">nmap_scan</text></g>
+
+<g class="tool"><rect x="400" y="416" width="258" height="20" rx="5"/><text x="410" y="430">osint.shodan</text></g>
+<g class="tool"><rect x="400" y="440" width="258" height="20" rx="5"/><text x="410" y="454">osint.intel</text></g>
+<g class="tool"><rect x="400" y="464" width="258" height="20" rx="5"/><text x="410" y="478">supply-chain</text></g>
+<g class="tool"><rect x="400" y="488" width="258" height="20" rx="5"/><text x="410" y="502">api.spec</text></g>
+<g class="tool"><rect x="400" y="512" width="258" height="20" rx="5"/><text x="410" y="526">api.swagger</text></g>
+<g class="tool"><rect x="400" y="536" width="258" height="20" rx="5"/><text x="410" y="550">recon.nuclei</text></g>
+<g class="tool"><rect x="400" y="560" width="258" height="20" rx="5"/><text x="410" y="574">web.browser</text></g>
+<g class="tool"><rect x="400" y="584" width="258" height="20" rx="5"/><text x="410" y="598">web.chrome</text></g>
+<g class="tool"><rect x="400" y="608" width="258" height="20" rx="5"/><text x="410" y="622">recon.binary</text></g>
+<g class="tool"><rect x="400" y="632" width="258" height="20" rx="5"/><text x="410" y="646">re.ghidra</text></g>
+<g class="tool"><rect x="400" y="656" width="258" height="20" rx="5"/><text x="410" y="670">re.frida</text></g>
+<g class="tool"><rect x="400" y="680" width="258" height="20" rx="5"/><text x="410" y="694">mobile.apk</text></g>
+<g class="tool"><rect x="400" y="704" width="258" height="20" rx="5"/><text x="410" y="718">mobile.ios</text></g>
+<g class="tool"><rect x="400" y="728" width="258" height="20" rx="5"/><text x="410" y="742">pkt.capture</text></g>
+<g class="tool"><rect x="400" y="752" width="258" height="20" rx="5"/><text x="410" y="766">pkt.sip</text></g>
+<g class="tool"><rect x="400" y="776" width="258" height="20" rx="5"/><text x="410" y="790">auto.can</text></g>
+<g class="tool"><rect x="400" y="800" width="258" height="20" rx="5"/><text x="410" y="814">mainframe.cics</text></g>
+<g class="tool"><rect x="400" y="824" width="258" height="20" rx="5"/><text x="410" y="838">web3.audit</text></g>
+<g class="tool"><rect x="400" y="848" width="258" height="20" rx="5"/><text x="410" y="862">chain.reason</text></g>
+<g class="tool"><rect x="400" y="872" width="258" height="20" rx="5"/><text x="410" y="886">code.context7</text></g>
+<g class="tool"><rect x="400" y="896" width="258" height="20" rx="5"/><text x="410" y="910">kube.k8s</text></g>
+
+<g class="tool"><rect x="400" y="920" width="258" height="20" rx="5"/><text x="410" y="934">ct_log_search</text></g>
+<g class="tool"><rect x="400" y="944" width="258" height="20" rx="5"/><text x="410" y="958">parse_wildcard_sans</text></g>
+<g class="tool"><rect x="400" y="968" width="258" height="20" rx="5"/><text x="410" y="982">reverse_dns_batch</text></g>
+<g class="tool"><rect x="400" y="992" width="258" height="20" rx="5"/><text x="410" y="1006">parse_spf</text></g>
+<g class="tool"><rect x="400" y="1016" width="258" height="20" rx="5"/><text x="410" y="1030">parse_dmarc</text></g>
+<g class="tool"><rect x="400" y="1040" width="258" height="20" rx="5"/><text x="410" y="1054">detect_role_from_profile</text></g>
+<g class="tool"><rect x="400" y="1064" width="258" height="20" rx="5"/><text x="410" y="1078">extract_vendors</text></g>
+<g class="tool"><rect x="400" y="1088" width="258" height="20" rx="5"/><text x="410" y="1102">extract_vendors_from_press</text></g>
+<g class="tool"><rect x="400" y="1112" width="258" height="20" rx="5"/><text x="410" y="1126">detect_location_context</text></g>
+<g class="tool"><rect x="400" y="1136" width="258" height="20" rx="5"/><text x="410" y="1150">detect_executive_absence</text></g>
+<g class="tool"><rect x="400" y="1160" width="258" height="20" rx="5"/><text x="410" y="1174">get_se_technique</text></g>
+<g class="tool"><rect x="400" y="1184" width="258" height="20" rx="5"/><text x="410" y="1198">get_phishing_template</text></g>
+<g class="tool"><rect x="400" y="1208" width="258" height="20" rx="5"/><text x="410" y="1222">mine_security_questions</text></g>
+<g class="tool"><rect x="400" y="1232" width="258" height="20" rx="5"/><text x="410" y="1246">harvest_video_content</text></g>
+<g class="tool"><rect x="400" y="1256" width="258" height="20" rx="5"/><text x="410" y="1270">build_personal_dict</text></g>
+<g class="tool"><rect x="400" y="1280" width="258" height="20" rx="5"/><text x="410" y="1294">dehashed_search</text></g>
+<g class="tool"><rect x="400" y="1304" width="258" height="20" rx="5"/><text x="410" y="1318">probe_default_ports</text></g>
+<g class="tool"><rect x="400" y="1328" width="258" height="20" rx="5"/><text x="410" y="1342">tls_fingerprint</text></g>
+<g class="tool"><rect x="400" y="1352" width="258" height="20" rx="5"/><text x="410" y="1366">favicon_hash</text></g>
+<g class="tool"><rect x="400" y="1376" width="258" height="20" rx="5"/><text x="410" y="1390">mmh3_32</text></g>
+<g class="tool"><rect x="400" y="1400" width="258" height="20" rx="5"/><text x="410" y="1414">grab_banner</text></g>
+<g class="tool"><rect x="400" y="1424" width="258" height="20" rx="5"/><text x="410" y="1438">scan_git_history</text></g>
+<g class="tool"><rect x="400" y="1448" width="258" height="20" rx="5"/><text x="410" y="1462">scan_text_for_config</text></g>
+<g class="tool"><rect x="400" y="1472" width="258" height="20" rx="5"/><text x="410" y="1486">scan_ci_cron</text></g>
+<g class="tool"><rect x="400" y="1496" width="258" height="20" rx="5"/><text x="410" y="1510">scan_paste_content</text></g>
+<g class="tool"><rect x="400" y="1520" width="258" height="20" rx="5"/><text x="410" y="1534">build_filetype_dork</text></g>
+<g class="tool"><rect x="400" y="1544" width="258" height="20" rx="5"/><text x="410" y="1558">brute_force_dirs</text></g>
+<g class="tool"><rect x="400" y="1568" width="258" height="20" rx="5"/><text x="410" y="1582">extract_doc_metadata</text></g>
+<g class="tool"><rect x="400" y="1592" width="258" height="20" rx="5"/><text x="410" y="1606">collect_documents</text></g>
+<g class="tool"><rect x="400" y="1616" width="258" height="20" rx="5"/><text x="410" y="1630">generate_custom_wordlist</text></g>
+<g class="tool"><rect x="400" y="1640" width="258" height="20" rx="5"/><text x="410" y="1654">generate_masks</text></g>
+
+<g class="tool"><rect x="400" y="1664" width="258" height="20" rx="5"/><text x="410" y="1678">whois</text></g>
+<g class="tool"><rect x="400" y="1688" width="258" height="20" rx="5"/><text x="410" y="1702">trivy</text></g>
+<g class="tool"><rect x="400" y="1712" width="258" height="20" rx="5"/><text x="410" y="1726">checkov</text></g>
+<g class="tool"><rect x="400" y="1736" width="258" height="20" rx="5"/><text x="410" y="1750">prowler</text></g>
+</svg>
