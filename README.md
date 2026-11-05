@@ -13,15 +13,69 @@ Point one MCP client at Cortex and you get the whole fleet — hexstrike (~100 o
 
 ## Requirements
 
-- Node.js 18+ (ES modules; upstream spawns expect an nvm Node at `~/.nvm/versions/node/v22.15.0`)
-- The sibling suite layout — Cortex spawns upstreams from hard-coded paths under `~/suite/mcps`, `~/hexstrike-ai`, etc. This is built to run inside its own suite, not standalone.
-- API keys for whichever upstreams you use (see Configuration)
+- **Node.js** — install via nvm; the upstream spawn paths in `src/clients.js` expect `~/.nvm/versions/node/v22.15.0`. If you use a different version, update the `NODE`/`NPMX` constants at the top of that file.
+- **The suite layout.** Cortex spawns its upstreams from hard-coded absolute paths under `$HOME` (`~/suite/mcps`, `~/hexstrike-ai`, `~/suite/mcp/suite-tools`, python venvs, homebrew binaries). It's built to run inside its own suite, not standalone. Every upstream is **lazy-spawned and optional** — a missing one just makes its tools unavailable; Cortex itself still starts.
+- API keys for whichever upstreams you use (see Configuration).
 
-## Install
+## Dependencies
+
+### 1. Local Node dependencies
 
 ```bash
 npm install
 ```
+
+This installs the direct deps from `package.json`: `@modelcontextprotocol/sdk`, `swagger-mcp`, `@rekl0w/mcp-openapi-discovery`, `chrome-devtools-mcp`, `mcp-server-kubernetes`, `zod`, and the local `mcp-shodan` (`file:../../mcps/mcp-shodan`).
+
+> ⚠️ `mcp-shodan` is a **local path** dependency. The sibling `~/suite/mcps/mcp-shodan` folder must exist (and be built — see below) or `npm install` fails. For a standalone clone, remove that line from `package.json` first.
+
+### 2. npx-fetched upstreams (automatic, no setup)
+
+These are pulled on first use by `npx -y`, so they need no manual install — just network access the first time:
+
+- `@playwright/mcp` — Playwright browser agent
+- `gc-nuclei-mcp` — Nuclei scanning
+- `@modelcontextprotocol/server-sequential-thinking` — reasoning
+- `ios-simulator-mcp` — iOS simulator
+- `@upstash/context7-mcp` — library docs
+
+### 3. System binaries
+
+```bash
+brew install nuclei        # gc-nuclei-mcp expects /opt/homebrew/bin/nuclei
+```
+
+Plus, for the tools that use them: `radare2` (`r2mcp` at `~/.local/share/radare2/prefix/bin/r2mcp`), and Ghidra for the Ghidra bridge.
+
+### 4. Sibling suite MCPs (built separately under `~/suite/mcps`)
+
+Cortex expects these to already be installed/built in the suite. Each is its own project:
+
+| Upstream | Path it's spawned from |
+|----------|------------------------|
+| `mcp-shodan` | `~/suite/mcps/mcp-shodan/build/index.js` (run its build) |
+| `osint` / `supplychain` | `~/suite/mcps/osint-mcp/dist/index.js` |
+| `solidaudit` | `~/suite/mcps/solidity-audit-mcp/dist/index.js` |
+| `wiremcp` | `~/suite/mcps/WireMCP/index.js` |
+| `sipnab` | `~/suite/mcps/sipnab/target/release/sipnab` (`cargo build --release`) |
+| `jadx` | `~/suite/mcps/jadx-mcp-server/jadx_mcp_server.py` |
+| `hack3270` | `~/suite/mcps/hack3270/MCPs/hack3270_mcp/hack3270_mcp.py` |
+| `ghidra` | `~/suite/mcps/pyenv/bin/ghidra-mcp` |
+| `frida` | `~/suite/mcps/pyenv/bin/frida-mcp` |
+| `peykan` | `~/suite/mcps/pyenv2/bin/peykan` (SSE on `:6278`) |
+
+### 5. hexstrike-ai (the main offensive fleet)
+
+The `hexstrike` upstream (~100 tools) runs from `~/hexstrike-ai` with its own Python venv, and Cortex connects to its server on `http://127.0.0.1:8888`:
+
+```bash
+# in ~/hexstrike-ai, with its hexstrike_env venv active
+python hexstrike_server.py        # start the server on :8888
+```
+
+### 6. suite-tools (the `suite.*` / `osint.*` helper arsenal)
+
+The `kind: "suite"` registry entries shell out to `~/suite/mcp/suite-tools/run.py`, run with the hexstrike venv's Python (`~/hexstrike-ai/hexstrike_env/bin/python`). That venv needs `requests`.
 
 ## Configuration
 
